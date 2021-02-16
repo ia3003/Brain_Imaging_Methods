@@ -1,4 +1,5 @@
 ### image processing python codes
+#:/usr/bin/python
 
 #import statement blocks
 
@@ -12,7 +13,7 @@ very_blurred_face = ndimage.gaussian_filter(face, sigma=15)
 
 #draw the image
 
-plt.imshow(very_blurred)
+plt.imshow(very_blurred_face)
 
 #show the image
 plt.show()
