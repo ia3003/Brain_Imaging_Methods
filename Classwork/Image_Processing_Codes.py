@@ -1,5 +1,4 @@
 ### image processing python codes
-#:/usr/bin/python
 
 #import statement blocks
 
