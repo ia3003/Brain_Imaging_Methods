@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 from scipy import misc,ndimage
 
 #import image file
-brain_image=plt.imread(Brain, format=None)
+brain_image=plt.imread('/Users/ishitaarun/Desktop/Brain.jpg')
 
 #find the dimensions of the original image
-shape(brain_image)
+dimensions=brain_image.shape
 
 #draw the original image
 plt.imshow(brain_image, cmap='Greys_r')
@@ -16,7 +16,7 @@ plt.imshow(brain_image, cmap='Greys_r')
 plt.show()
 
 #plot histogram of the image
-plt.hist(brain_image, bins=10, align='mid', orientation='vertical', stacked=False)
+hist_original = plt.hist(brain_image, bins=10, align='mid', orientation='vertical', stacked=False)
 
 #smoothing the image
 brain_image_5=ndimage.gaussian_filter(brain_image, sigma=5)
@@ -38,9 +38,9 @@ plt.imshow(brain_image_50, cmap='Greys_r')
 plt.show()
 
 #plotting histogram for smoothened images
-plt.hist(brain_image_5, bins=10, align='mid', orientation='vertical', stacked=False)
-plt.hist(brain_image_10, bins=10, align='mid', orientation='vertical', stacked=False)
-plt.hist(brain_image_20, bins=10, align='mid', orientation='vertical', stacked=False)
-plt.hist(brain_image_30, bins=10, align='mid', orientation='vertical', stacked=False)
-plt.hist(brain_image_40, bins=10, align='mid', orientation='vertical', stacked=False)
-plt.hist(brain_image_50, bins=10, align='mid', orientation='vertical', stacked=False)
+hist_5=plt.hist(brain_image_5, bins=10, align='mid', orientation='vertical', stacked=False)
+hist_10=plt.hist(brain_image_10, bins=10, align='mid', orientation='vertical', stacked=False)
+hist_20=plt.hist(brain_image_20, bins=10, align='mid', orientation='vertical', stacked=False)
+hist_30=plt.hist(brain_image_30, bins=10, align='mid', orientation='vertical', stacked=False)
+hist_40=plt.hist(brain_image_40, bins=10, align='mid', orientation='vertical', stacked=False)
+hist_50=plt.hist(brain_image_50, bins=10, align='mid', orientation='vertical', stacked=False)
