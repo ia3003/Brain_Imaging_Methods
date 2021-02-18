@@ -40,6 +40,7 @@ plt.show()
 
 #plotting histogram for smoothened images
 hist_5=plt.hist(brain_image_5, bins=10, align='mid', orientation='vertical', stacked=False)
+plt.show()
 hist_10=plt.hist(brain_image_10, bins=10, align='mid', orientation='vertical', stacked=False)
 hist_20=plt.hist(brain_image_20, bins=10, align='mid', orientation='vertical', stacked=False)
 hist_30=plt.hist(brain_image_30, bins=10, align='mid', orientation='vertical', stacked=False)
