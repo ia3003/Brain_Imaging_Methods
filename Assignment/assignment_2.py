@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from scipy import misc,ndimage
 
 #import image file
-brain_image=plt.imread("Brain.jpg")
+brain_image=plt.imread(Brain, format=None)
 
 #find the dimensions of the original image
 shape(brain_image)
