@@ -8,6 +8,7 @@ brain_image=plt.imread('/Users/ishitaarun/Desktop/Brain.jpg')
 
 #find the dimensions of the original image
 dimensions=brain_image.shape
+print(dimensions)
 
 #draw the original image
 plt.imshow(brain_image, cmap='Greys_r')
