@@ -17,6 +17,7 @@ plt.show()
 
 #plot histogram of the image
 hist_original = plt.hist(brain_image, bins=10, align='mid', orientation='vertical', stacked=False)
+plt.show()
 
 #smoothing the image
 brain_image_5=ndimage.gaussian_filter(brain_image, sigma=5)
