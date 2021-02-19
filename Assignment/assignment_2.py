@@ -59,7 +59,7 @@ plt.imshow(brain_image_30, cmap='Greys_r') #draw the image in greyscale
 plt.savefig('smoothened_30.png', dpi=300, bbox_inches='tight') #save the image
 plt.close() #close the image file
 hist_30=plt.hist(brain_image_30, bins=10) #plot histogram for the smoothened image
-plt.savefig('original_hist_20.png', dpi=300, bbox_inches='tight') #save the histogram for the smoothened image
+plt.savefig('original_hist_30.png', dpi=300, bbox_inches='tight') #save the histogram for the smoothened image
 plt.close() #close the histogram file
 
 #sigma=40
