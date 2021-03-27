@@ -4,7 +4,8 @@ from psychopy.hardware import keyboard # import keyboard library
 import numpy as np
 import csv
 import random
-from itertools import permutations 
+from itertools import permutations
+
 
 # Set logging level and create log file
 # getting the timestamp and including it into the logfile name
@@ -50,15 +51,18 @@ purple_list=[(150,100,100),(150,100,120),(150,100,140),(150,100,160),(150,100,18
 orange_list=[(220,100,0),(220,120,0),(220,140,0),(220,160,0),(220,180,0),(220,200,0),(220,220,0),(220,240,0)]
 
 color_list = [blue_list, red_list, green_list, purple_list, orange_list]
-hue_ids = list(range(no_hues))
-hue_comb = list(permutations(hue_ids,2)) #hue combinations
+
 
 updated_color_list = []
 for color in color_list:
   for idx in range(0,len(blue_list)):
     color[idx] = change_scale(color[idx])
   updated_color_list.append(color)
-random.shuffle(updated_color_list)
+
+final_list = []
+for color in updated_color_list:
+  final_list+=list(permutations(color,2))
+random.shuffle(final_list)
  
 #create a window
 mywin = visual.Window([800,600], monitor="testMonitor", units="deg")
@@ -77,34 +81,49 @@ fixation.draw()
 mywin.update()
 core.wait(0.5)
 
+fields =  ['Participant ID', 'Trial no', 'Target Color', 'Dist1', 'Dist2', 'Response', 'Accuracy']
+filename = 'Participant_'+str(current_participant)+'.csv'
+trial_no=1
+with open (filename,'a') as my_file:
+    writer = csv.DictWriter(my_file, fieldnames = fields)
+    writer.writeheader()
 
-for color in updated_color_list:
-    random.shuffle(hue_comb)    
-    for hue_pair in hue_comb: #(1,6)
-        dist1_color = color[hue_pair[0]]
-        dist2_color = color[hue_pair[1]]
-        target_color = color[random.choice(hue_pair)]
-        #create rectangular stimuli
-        target = visual.Rect(win=mywin, width=5, height =5, pos=[0,0], fillColor=target_color, lineColor = None)
-        dist1 = visual.Rect(win=mywin, width=5, height =5, pos=[-6,0], fillColor=dist1_color, lineColor = None)
-        dist2 = visual.Rect(win=mywin, width=5, height =5, pos=[6,0], fillColor=dist2_color, lineColor = None)
-        target.draw()
-        mywin.update()
-        core.wait(0.8)
-        dist1.draw()
-        dist2.draw()
-        mywin.update()
-        core.wait(0.8)
-        #Subject_Response = event.waitKeys(keyList=['right', 'left'])
-        
 
-#print(Subject_Response)
-#data.append(keys)
-#keys = psychopy.event.waitKeys(timeStamped=clock)
-#print(keys)
+for hue_comb in final_list:
+    dist1_color = hue_comb[0]
+    dist2_color = hue_comb[1]
+    target_color = random.choice(hue_comb)
+    if target_color == dist1_color:
+        correct_resp = 'left'
+    else:
+        correct_resp = 'right'
+    #create rectangular stimuli
+    target = visual.Rect(win=mywin, width=5, height =5, pos=[0,0], fillColor=target_color, lineColor = None)
+    dist1 = visual.Rect(win=mywin, width=5, height =5, pos=[-6,0], fillColor=dist1_color, lineColor = None)
+    dist2 = visual.Rect(win=mywin, width=5, height =5, pos=[6,0], fillColor=dist2_color, lineColor = None)
+    target.draw()
+    mywin.update()
+    core.wait(0.8)
+    dist1.draw()
+    dist2.draw()
+    mywin.update()
+    Subject_Response = event.waitKeys(keyList=['right', 'left'])
+    #print(Subject_Response)
+    if Subject_Response[0]==correct_resp:
+        accuracy = 1
+    else:
+        accuracy = 0
+    resp_dict = [{'Participant ID': current_participant, 'Trial no': trial_no, 'Target Color': target_color,'Dist1':dist1_color, 'Dist2': dist2_color,'Response': Subject_Response[0], 'Accuracy': accuracy}]
+    data.append(resp_dict)
+   
+    trial_no+=1
+    with open(filename,'a') as my_file:
+        writer = csv.DictWriter(my_file, fieldnames = fields)
+        writer.writerows(resp_dict)
+
 mywin.update()
 logging.flush()  
-   
+ 
 Participant_Instruction.setText('End of the Experiment. Thank you')
 Participant_Instruction.draw()
 mywin.update()
