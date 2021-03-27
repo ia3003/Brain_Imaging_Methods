@@ -6,7 +6,6 @@ import csv
 import random
 from itertools import permutations
 
-
 # Set logging level and create log file
 # getting the timestamp and including it into the logfile name
 #timestamp=datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -52,13 +51,16 @@ orange_list=[(220,100,0),(220,120,0),(220,140,0),(220,160,0),(220,180,0),(220,20
 
 color_list = [blue_list, red_list, green_list, purple_list, orange_list]
 
-
 updated_color_list = []
 for color in color_list:
   for idx in range(0,len(blue_list)):
     color[idx] = change_scale(color[idx])
   updated_color_list.append(color)
 
+hue_list = []
+for item in updated_color_list:
+    hue_list+=item
+    
 final_list = []
 for color in updated_color_list:
   final_list+=list(permutations(color,2))
@@ -82,7 +84,7 @@ mywin.update()
 core.wait(0.5)
 
 fields =  ['Participant ID', 'Trial no', 'Target Color', 'Dist1', 'Dist2', 'Response', 'Accuracy']
-filename = 'Participant_'+str(current_participant)+'.csv'
+filename = 'Expt1_Participant_'+str(current_participant)+'.csv'
 trial_no=1
 with open (filename,'a') as my_file:
     writer = csv.DictWriter(my_file, fieldnames = fields)
@@ -114,12 +116,49 @@ for hue_comb in final_list:
     else:
         accuracy = 0
     resp_dict = [{'Participant ID': current_participant, 'Trial no': trial_no, 'Target Color': target_color,'Dist1':dist1_color, 'Dist2': dist2_color,'Response': Subject_Response[0], 'Accuracy': accuracy}]
-    data.append(resp_dict)
    
     trial_no+=1
     with open(filename,'a') as my_file:
         writer = csv.DictWriter(my_file, fieldnames = fields)
         writer.writerows(resp_dict)
+    break
+
+mywin.update()
+logging.flush()  
+
+random.shuffle(hue_list)
+
+def get_names():  # GUI Dialogue Box
+    color_name = gui.Dlg()
+    color_name.addField("Color Name")
+    color_name.show()
+    naming_data = color_name.data[0]
+    return naming_data
+#current_color = get_names()
+
+fields =  ['Participant ID', 'Trial no', 'Hue Color', 'Verbal Labels']
+filename = 'Expt2_Participant_'+str(current_participant)+'.csv'
+trial_no=1
+with open (filename,'a') as my_file:
+    writer = csv.DictWriter(my_file, fieldnames = fields)
+    writer.writeheader()
+
+for hue in hue_list:
+    target = visual.Rect(win=mywin, width=5, height =5, pos=[0,0], fillColor=hue, lineColor = None)
+    fixation.draw()
+    mywin.update()
+    core.wait(0.5)
+    target.draw()
+    mywin.update()
+    core.wait(1)
+    current_color = get_names()
+    resp_dict = [{'Participant ID': current_participant, 'Trial no': trial_no, 'Hue Color':hue,'Verbal Labels': current_color}]
+   
+    trial_no+=1
+    with open(filename,'a') as my_file:
+        writer = csv.DictWriter(my_file, fieldnames = fields)
+        writer.writerows(resp_dict)
+
 
 mywin.update()
 logging.flush()  
