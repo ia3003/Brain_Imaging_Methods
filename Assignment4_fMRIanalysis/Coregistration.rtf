@@ -1,0 +1,15 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab20
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab20\partightenfactor0
+
+\f0\fs22 \cf2 \CocoaLigature0 /usr/local/fsl/bin/flirt -in /Users/ishitaarun/Desktop/PhD/Sem_1/Brain_Imaging_Methods/Assignment4_analysis.feat/mean_func.nii.gz -ref /Users/ishitaarun/Desktop/PhD/Sem_1/Brain_Imaging_Methods/fsl_course_data/fmri1/fluency_task/structural_brain.nii -out /Users/ishitaarun/Desktop/PhD/Sem_1/Brain_Imaging_Methods/Assignment4_analysis.feat/func2struc.nii.gz -omat /Users/ishitaarun/Desktop/PhD/Sem_1/Brain_Imaging_Methods/Assignment4_analysis.feat/func2struc.mat -bins 256 -cost corratio -searchrx -90 90 -searchry -90 90 -searchrz -90 90 -dof 12  -interp trilinear\
+\
+\
+/usr/local/fsl/bin/flirt -in /Users/ishitaarun/Desktop/PhD/Sem_1/Brain_Imaging_Methods/Assignment4_analysis.feat/thresh_zstat1.nii.gz -applyxfm -init /Users/ishitaarun/Desktop/PhD/Sem_1/Brain_Imaging_Methods/Assignment4_analysis.feat/func2struc.mat -out /Users/ishitaarun/Desktop/PhD/Sem_1/Brain_Imaging_Methods/Assignment4_analysis.feat/zstat1_act2struc.nii.gz -paddingsize 0.0 -interp trilinear -ref /Users/ishitaarun/Desktop/PhD/Sem_1/Brain_Imaging_Methods/Assignment4_analysis.feat/func2struc.nii.gz\
+\
+\
+/usr/local/fsl/bin/flirt -in /Users/ishitaarun/Desktop/PhD/Sem_1/Brain_Imaging_Methods/Assignment4_analysis.feat/thresh_zstat2.nii.gz -applyxfm -init /Users/ishitaarun/Desktop/PhD/Sem_1/Brain_Imaging_Methods/Assignment4_analysis.feat/func2struc.mat -out /Users/ishitaarun/Desktop/PhD/Sem_1/Brain_Imaging_Methods/Assignment4_analysis.feat/zstat2_act2struc.nii.gz -paddingsize 0.0 -interp trilinear -ref /Users/ishitaarun/Desktop/PhD/Sem_1/Brain_Imaging_Methods/Assignment4_analysis.feat/func2struc.nii.gz}
